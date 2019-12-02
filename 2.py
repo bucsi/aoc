@@ -21,8 +21,8 @@ while(1):
         else:
             print(f"Hiba az {i}. mezoben: {prog[i]}")
         i += 4
-    print(f"{cycle}.ism:\t{noun}, {verb} -> {prog[1]}")
-    if(prog[1] == 19690720):
+    print(f"{cycle}.ism:\t{noun}, {verb} -> {prog[0]}")
+    if(prog[0] == 19690720):
         break
     else:
         cycle += 1
