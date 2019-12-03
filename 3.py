@@ -1,14 +1,12 @@
 import sys
-sys.setrecursionlimit(1500)
+sys.setrecursionlimit(1500) #deepest we go is ~1000,which hits the conservative python limit
 
 def get_input(filename):
     with open(filename, "r") as f:
         return f.read().split("\n")
 
-l1 = [(0,0)]
-l2 = [(0,0)]
-
-p1, p2 = get_input("3.txt")
+def distanceFromZero (some_tuple):
+    return abs(some_tuple[0]) + abs(some_tuple[1])
 
 def parseDirection(direction, step, biglist):
     if step > 0:
@@ -25,16 +23,17 @@ def parseDirection(direction, step, biglist):
         biglist.append((x,y))
         parseDirection(direction, step-1, biglist)
 
-def distanceFromZero (some_tuple):
-    return abs(some_tuple[0]) + abs(some_tuple[1])
+l1 = [(0,0)]
+l2 = [(0,0)]
 
+p1, p2 = get_input("3.txt")
 
-for i, elem in enumerate(p1.split(",")):
+for elem in p1.split(","):
     d = elem[0]
     s = int(elem[1:])
     parseDirection(d,s,l1)
 
-for i, elem in enumerate(p2.split(",")):
+for elem in p2.split(","):
     d = elem[0]
     s = int(elem[1:])
     parseDirection(d,s,l2)
