@@ -25,6 +25,9 @@ def parseDirection(direction, step, biglist):
         biglist.append((x,y))
         parseDirection(direction, step-1, biglist)
 
+def distanceFromZero (some_tuple):
+    return abs(some_tuple[0]) + abs(some_tuple[1])
+
 
 for i, elem in enumerate(p1.split(",")):
     d = elem[0]
@@ -36,4 +39,8 @@ for i, elem in enumerate(p2.split(",")):
     s = int(elem[1:])
     parseDirection(d,s,l2)
 
-print(frozenset(l1).intersection(l2))
+points = set(l1).intersection(l2)
+points.remove((0,0))
+print(points)
+
+print(min([distanceFromZero(x) for x in points]))
