@@ -27,12 +27,12 @@ def parseDirection(direction, step, biglist):
 
 
 for i, elem in enumerate(p1.split(",")):
-    d = elem[1]
+    d = elem[0]
     s = int(elem[1:])
     parseDirection(d,s,l1)
 
 for i, elem in enumerate(p2.split(",")):
-    d = elem[1]
+    d = elem[0]
     s = int(elem[1:])
     parseDirection(d,s,l2)
 
