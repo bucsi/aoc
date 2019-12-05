@@ -19,6 +19,8 @@ def unpack_opcode(opcode):
 prog = [int(n) for n in get_input("5.txt")]
 step = 4
 
+prog = [3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99]
+
 prev_i = -9
 i = 0
 halt = False
@@ -49,17 +51,21 @@ while(not halt):
     elif op in ["05", "06"]:
         # GOTO
         x = get_params(mode_of_p1, i, 1, prog)
-        p = get_params(mode_of_p2, i, 3, prog)
+        p = get_params(mode_of_p2, i, 2, prog)
         print(f"\t\t\tDEBUG: {prog[i:i+3]} -> {op, x, p}")
-        print("the instruction pointer went from", i, end=" ")
+        print("\t\t\tDEBUG:the instruction pointer went from", i, end=" ")
         if op == "05":
             if prog[x] != 0:
                 i = p
+                print("to", i)
+                continue
         else:
             if prog[x] == 0:
                 i = p
-        print("to", i)
-        continue
+                print("to", i)
+                continue
+        print("to nowhere, as the statement was false")
+        step = 3
     elif op in ["07","08"]:
         # compare
         x = get_params(mode_of_p1, i, 1, prog)
