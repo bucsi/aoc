@@ -5,10 +5,10 @@ def get_input(filename):
 def get_params(mode, op_addr, param_position, program):
     if mode == "1":
         # immediate mode
-        return program[op_addr + param_position]
+        return op_addr + param_position
     elif mode == "0":
         # position mode
-        return program[program[op_addr + param_position]]
+        return program[op_addr + param_position]
 
 def unpack_opcode(opcode):
     opcode = str(opcode)
@@ -32,20 +32,20 @@ while(not halt):
         # + or *
         x = get_params(mode_of_p1, i, 1, prog)
         y = get_params(mode_of_p2, i, 2, prog)
-        p = get_params("1", i, 3, prog)
+        p = get_params("0", i, 3, prog)
         print(f"\t\t\tDEBUG: {prog[i:i+4]} -> {op, x, y, p}")
         if op == "01":
-            prog[p] = x+y
+            prog[p] = prog[x]+prog[y]
         else:
-            prog[p] = x*y
+            prog[p] = prog[x]*prog[y]
         step = 4
     elif op in ["03","04"]:
         # in/output
-        p = get_params('1', i, 1, prog)
-        print(f"\t\t\tDEBUG: {prog[i:i+2]} -> {op, p}")
         if op == "03":
+            p = get_params('0', i, 1, prog)
             prog[p] = int(input(f"INPUT (to addr {p}): "))
         else:
+            p = get_params(mode_of_p1, i, 1, prog)
             print(f"OUT: addr {p} is {prog[p]}")
         step = 2
     elif op in ["05", "06"]:
@@ -56,12 +56,12 @@ while(not halt):
         print("\t\t\tDEBUG:the instruction pointer went from", i, end=" ")
         if op == "05":
             if prog[x] != 0:
-                i = p
+                i = prog[p]
                 print("to", i)
                 continue
         else:
             if prog[x] == 0:
-                i = p
+                i = prog[p]
                 print("to", i)
                 continue
         print("to nowhere, as the statement was false")
@@ -70,15 +70,15 @@ while(not halt):
         # compare
         x = get_params(mode_of_p1, i, 1, prog)
         y = get_params(mode_of_p2, i, 2, prog)
-        p = get_params("1", i, 3, prog)
+        p = get_params("0", i, 3, prog)
         print(f"\t\t\tDEBUG: {prog[i:i+4]} -> {op, x, y, p}")
         if op == "07":
-            if x < y:
+            if prog[x] < prog[y]:
                 prog[p] = 1
             else:
                 prog[p] = 0
         else:
-            if x == y:
+            if prog[x] == prog[y]:
                 prog[p] = 1
             else:
                 prog[p] = 0
