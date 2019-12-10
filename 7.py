@@ -1,3 +1,5 @@
+from itertools import permutations 
+
 def get_input(filename):
     with open(filename, "r") as f:
         return f.read().split(",")
@@ -13,7 +15,6 @@ def unpack_opcode(opcode):
     while(len(opcode) < 5):
         opcode = "0" + opcode
     return opcode[-2:], opcode[-3], opcode[-4], opcode[-5]
-
 def intcode_computer(phase_val, input_val):
     prog = [int(n) for n in get_input("7.txt")]
     step = 4
@@ -44,11 +45,12 @@ def intcode_computer(phase_val, input_val):
                 p = get_params('0', i, 1, prog)
                 if first_read:
                     prog[p] = phase_val
+                    first_read = False
                 else:
                     prog[p] = input_val
             else:
                 p = get_params(mode_of_p1, i, 1, prog)
-                print(f"OUT: addr {p} is {prog[p]}")
+                #print(f"OUT: addr {p} is {prog[p]}")
                 out = prog[p]
             step = 2
         elif op in ["05", "06"]:
@@ -87,7 +89,7 @@ def intcode_computer(phase_val, input_val):
                     prog[p] = 0
             step = 4
         elif(op == "99"):
-            print("----- H A L T -----")
+            #print("----- H A L T -----")
             halt = True
         else:
             print(f"ERR: Unknown op ({prog[i]}) at position {i}")
@@ -98,4 +100,14 @@ def intcode_computer(phase_val, input_val):
             break
     return out
 
-print(intcode_computer(0,0))
+phase = [4,3,2,1,0]
+
+res = []
+
+for phase in permutations(range(5)):
+    ares = intcode_computer(phase[0],0)
+    bres = intcode_computer(phase[1],ares)
+    cres = intcode_computer(phase[2],bres)
+    dres = intcode_computer(phase[3],cres)
+    res.append(intcode_computer(phase[4],dres))
+print(max(res))
