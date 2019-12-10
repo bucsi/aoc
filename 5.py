@@ -24,14 +24,14 @@ i = 0
 halt = False
 while(not halt):
     op, mode_of_p1, mode_of_p2, mode_of_p3 = unpack_opcode(prog[i])
-    print(f"\t\t\tDEBUG: startig operation at addr {i}")
-    print(f"\t\t\tDEBUG: {op, mode_of_p1, mode_of_p2, mode_of_p3} unpacked from {prog[i]}")
+    #print(f"\t\t\tDEBUG: startig operation at addr {i}")
+    #print(f"\t\t\tDEBUG: {op, mode_of_p1, mode_of_p2, mode_of_p3} unpacked from {prog[i]}")
     if op in ["01","02"]:
         # + or *
         x = get_params(mode_of_p1, i, 1, prog)
         y = get_params(mode_of_p2, i, 2, prog)
         p = get_params("0", i, 3, prog)
-        print(f"\t\t\tDEBUG: {prog[i:i+4]} -> {op, x, y, p}")
+        #print(f"\t\t\tDEBUG: {prog[i:i+4]} -> {op, x, y, p}")
         if op == "01":
             prog[p] = prog[x]+prog[y]
         else:
@@ -50,8 +50,8 @@ while(not halt):
         # GOTO
         x = get_params(mode_of_p1, i, 1, prog)
         p = get_params(mode_of_p2, i, 2, prog)
-        print(f"\t\t\tDEBUG: {prog[i:i+3]} -> {op, x, p}")
-        print("\t\t\tDEBUG:the instruction pointer went from", i, end=" ")
+        #print(f"\t\t\tDEBUG: {prog[i:i+3]} -> {op, x, p}")
+        #print("\t\t\tDEBUG:the instruction pointer went from", i, end=" ")
         if op == "05":
             if prog[x] != 0:
                 i = prog[p]
@@ -69,7 +69,7 @@ while(not halt):
         x = get_params(mode_of_p1, i, 1, prog)
         y = get_params(mode_of_p2, i, 2, prog)
         p = get_params("0", i, 3, prog)
-        print(f"\t\t\tDEBUG: {prog[i:i+4]} -> {op, x, y, p}")
+        #print(f"\t\t\tDEBUG: {prog[i:i+4]} -> {op, x, y, p}")
         if op == "07":
             if prog[x] < prog[y]:
                 prog[p] = 1
