@@ -1,10 +1,3 @@
-let converter = (arr: Array<string>): [number, number, string, string] => [
-    parseInt(arr[0]),
-    parseInt(arr[1]),
-    arr[2],
-    arr[4]
-]
-
 let text = Deno.readTextFile("./2.txt")
 
 text.then(r => r.split("\n"))
@@ -25,3 +18,13 @@ text.then(r => r.split("\n"))
         }, 0)
     )
     .then(res => console.log(`Valid passwords for task 2: ${res}`))
+
+let converter = (arr: Array<string>): [number, number, string, string] => [
+    parseInt(arr[0]),
+    parseInt(arr[1]),
+    arr[2],
+    arr[4]
+]
+
+
+export {}
