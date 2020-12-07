@@ -1,0 +1,10 @@
+- Runtime
+  - The solutions are for the [`deno`](deno.land) `TypeScript` runtime.
+  - Don't forget to allow `deno` to read files with `deno run --allow-read file.ts`
+- File names
+  - For the **{n}**-th day, the input is `{n}.txt` and the solution is `{n}ts`.
+  - Sometimes, the day's example input is included as `{n}.txt`
+  - For **day 4**, I included the second part's example as `4b.txt`
+- Output
+  - Most of the times, the code outputs part 1 and part 2 solutions labelled clearly, if not uniformly.
+  - For **day 4**, set the `part` variable on line 1 to `1` or `2` depending on which part you want to solve.
