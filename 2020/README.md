@@ -1,5 +1,5 @@
 - Runtime
-  - The solutions are for the [`deno`](deno.land) `TypeScript` runtime.
+  - The solutions are for the [`deno`](https://deno.land) `TypeScript` runtime.
   - Don't forget to allow `deno` to read files with `deno run --allow-read file.ts`
 - File names
   - For the **{n}**-th day, the input is `{n}.txt` and the solution is `{n}ts`.
