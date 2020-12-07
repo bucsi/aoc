@@ -17,7 +17,7 @@ const valid = (current: string[]) => {
     if (part === 1) {
         return current.length === 8 || (current.length === 7 && !current.some(el => el.includes("cid:")))
     }
-    if (!(current.length === 8 || (current.length === 7 && !current.some(el => el.includes("cid:"))))){
+    if (!(current.length === 8 || (current.length === 7 && !current.some(el => el.includes("cid:"))))) {
         return false
     }
     for (let row of current) {
@@ -38,8 +38,8 @@ const valid = (current: string[]) => {
                 if (!(!isNaN(numericValue) && 150 <= numericValue && numericValue <= 193)) return false
             } else if (measurement === "in") {
                 if (!(!isNaN(numericValue) && 59 <= numericValue && numericValue <= 76)) return false
-            }else{
-                return false;
+            } else {
+                return false
             }
         } else if (field === "hcl") {
             if (value.match(/^#[0-9a-f]{6}/i) === null) return false

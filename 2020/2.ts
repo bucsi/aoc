@@ -25,6 +25,3 @@ let converter = (arr: Array<string>): [number, number, string, string] => [
     arr[2],
     arr[4]
 ]
-
-
-export {}
