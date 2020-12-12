@@ -3,7 +3,7 @@
   - Don't forget to allow `deno` to read files with `deno run --allow-read file.ts`
 - File names
   - For the **{n}**-th day, the input is `{n}.txt` and the solution is `{n}ts`.
-  - Sometimes, the day's example input is included as `{n}.txt`
+  - Sometimes, the day's example input is included as `{n}a.txt`
   - For **day 4**, I included the second part's example as `4b.txt`
 - Output
   - Most of the times, the code outputs part 1 and part 2 solutions labelled clearly, if not uniformly.
