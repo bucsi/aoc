@@ -23,6 +23,6 @@ with open('input.txt', 'r') as infile:
         map_to(splitter),
         map_to(find_common),
         map_to(get_priority),
-        sum
+        sum,
     )
     print(solution(lines))
