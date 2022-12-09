@@ -2,5 +2,6 @@
     "python.formatting.provider": "yapf",
     "python.formatting.yapfArgs": [
         "--style={based_on_style: google, split_all_top_level_comma_separated_values:true, dedent_closing_brackets:true,split_before_dot:true, split_arguments_when_comma_terminated:true, split_before_first_argument:true}"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }
