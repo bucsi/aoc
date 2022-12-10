@@ -25,7 +25,7 @@ class Position:
         if "R" in direction:
             self.x += 1
 
-    def get_direction_towards(self, other: Position) -> list[str | int]:
+    def get_direction_towards(self, other: Position) -> tuple[str, int]:
         direction = ""
         if self.x < other.x:
             direction += "R"
@@ -36,11 +36,11 @@ class Position:
         if other.y < self.y:
             direction += "D"
 
-        return [
+        return (
             direction, round(math.dist(self.get_coords(), other.get_coords()))
-        ]
+        )
 
-    def get_coords(self) -> tuple[int]:
+    def get_coords(self) -> tuple[int, int]:
         return (self.x, self.y)
 
 
@@ -51,7 +51,8 @@ print(steps)
 
 head = Position()
 tail = Position()
-visited = set(tail.get_coords())
+visited: set[tuple[int, int]] = set()
+visited.add(tail.get_coords())
 
 for step in steps:
     for i in range(step.amount):
