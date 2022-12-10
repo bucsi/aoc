@@ -51,11 +51,11 @@ for row in trees:
 
 for col in zip(*trees):
     for i, tree in enumerate(col):
-        for top_neighbor in col[:i]:
+        for top_neighbor in reversed(col[:i]):
             tree.viewing_distance.top += 1
             if tree.height <= top_neighbor.height:
                 break
-        for bottom_neighbor in reversed(col[i + 1:]):
+        for bottom_neighbor in col[i + 1:]:
             tree.viewing_distance.bottom += 1
             if tree.height <= bottom_neighbor.height:
                 break
