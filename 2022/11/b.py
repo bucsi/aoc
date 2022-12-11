@@ -1,5 +1,7 @@
 from tqdm import tqdm
 import os
+from operator import mul
+from functools import reduce
 
 
 def squared(item: int):
@@ -42,8 +44,8 @@ class Monkey:
         self.items = []
 
     def process(self, item):
-        global monkeys
-        item = self.perform_operation(item)
+        global monkeys, least_common_multiple
+        item = self.perform_operation(item) % least_common_multiple
         if self.test(item):
             monkeys[self.if_true].items.append(item)
         else:
@@ -88,6 +90,10 @@ with open("input.txt", "r") as f:
         if_true = int(if_true.split("monkey ")[1])
         if_false = int(if_false.split("monkey ")[1])
         monkeys.append(Monkey(name, items, operation, test, if_true, if_false))
+
+divisors = map(lambda monkey: monkey.test_value, monkeys)
+least_common_multiple = reduce(lambda s, x: s * x, divisors, 1)
+print(least_common_multiple)
 
 for round in range(10_000):
     os.system("clear")
