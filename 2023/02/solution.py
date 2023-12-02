@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from functools import reduce
 from typing import Literal, Self
 from functional_utilities import chain, filter_with, map_to
 
@@ -31,6 +32,9 @@ class RevelationRecord:
             and self.blue <= BLUE_TOTAL
         )
 
+    def product(self) -> int:
+        return self.red * self.green * self.blue
+
 
 @dataclass
 class GameRecord:
@@ -50,8 +54,16 @@ class GameRecord:
     def is_possible(self):
         return all([revelation.is_possible() for revelation in self.revelations])
 
-    def total(self):
-        return f"{self.id=} red = {max([revelation.red for revelation in self.revelations])}, green = {max([revelation.green for revelation in self.revelations])}, blue = {max([revelation.blue for revelation in self.revelations])}"
+    def minimal_possible(self) -> RevelationRecord:
+        all_revealed = RevelationRecord()
+        all_revealed.add("red", max(revelation.red for revelation in self.revelations))
+        all_revealed.add(
+            "green", max(revelation.green for revelation in self.revelations)
+        )
+        all_revealed.add(
+            "blue", max(revelation.blue for revelation in self.revelations)
+        )
+        return all_revealed
 
 
 # only 12 red cubes, 13 green cubes, and 14 blue cubes
@@ -80,5 +92,19 @@ for line in data:
     games.append(game)
 
 
-part1 = chain(filter_with(lambda g: g.is_possible()), map_to(lambda g: g.id), sum)
+part1 = chain(
+    filter_with(lambda g: g.is_possible()),
+    map_to(lambda g: g.id),
+    sum
+)
+
+
 print(part1(games))
+
+part2 = chain(
+    map_to(lambda g: g.minimal_possible()),
+    map_to(lambda r: r.product()),
+    sum
+)
+
+print(part2(games))
