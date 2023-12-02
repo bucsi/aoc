@@ -6,4 +6,5 @@
 | <img height="16" width="16" src="https://cdn.simpleicons.org/python/gray" alt="python" />         | 2019 | Python            | day 8         |
 | <img height="16" width="16" src="https://cdn.simpleicons.org/typescript/gray" alt="TypeScript" /> | 2020 | TypeScript + deno | day 6         |
 | <img height="16" width="16" src="https://cdn.simpleicons.org/python/gray" alt="python" />         | 2021 | Python            | day 8         |
-| <img height="16" width="16" src="https://cdn.simpleicons.org/python/3776AB" alt="python" />       | 2022 | Python            | _in progress_ |
+| <img height="16" width="16" src="https://cdn.simpleicons.org/python/gray" alt="python" />       | 2022 | Python            | day 11 |
+| <img height="16" width="16" src="https://cdn.simpleicons.org/python/3776AB" alt="python" />       | 2023 | Python            | _in progress_ |
