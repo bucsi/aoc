@@ -48,20 +48,8 @@ class GameRecord:
         self.revelations.append(revelation)
 
     def is_possible(self):
-        # return all([revelation.is_possible() for revelation in self.revelations])
-        max_counts = {
-            'red': max(revelation.red for revelation in self.revelations),
-            'green': max(revelation.green for revelation in self.revelations),
-            'blue': max(revelation.blue for revelation in self.revelations),
-        }
+        return all([revelation.is_possible() for revelation in self.revelations])
 
-        possible = all(count <= total_count for count, total_count in zip(max_counts.values(), (RED_TOTAL, GREEN_TOTAL, BLUE_TOTAL)))
-
-        if not possible:
-            print(f"Game {self.id} is not possible. Max counts: {max_counts}, Total counts: ({RED_TOTAL}, {GREEN_TOTAL}, {BLUE_TOTAL})")
-
-        return possible
-    
     def total(self):
         return f"{self.id=} red = {max([revelation.red for revelation in self.revelations])}, green = {max([revelation.green for revelation in self.revelations])}, blue = {max([revelation.blue for revelation in self.revelations])}"
 
@@ -70,10 +58,10 @@ class GameRecord:
 RED_TOTAL = 12
 GREEN_TOTAL = 13
 BLUE_TOTAL = 14
-FILENAME = "./magic.txt"
+FILENAME = "./input.txt"
 
 with open(FILENAME, "r") as inf:
-    data = [line for line in inf.readlines()]
+    data = [line.strip() for line in inf.readlines()]
 
 
 games: list[GameRecord] = []
@@ -92,14 +80,5 @@ for line in data:
     games.append(game)
 
 
-part1 = chain(
-    filter_with(lambda g: g.is_possible()),
-    map_to(lambda g: g.id),
-    sum
-    # map_to(lambda g: g.total()),
-    # list
-)
+part1 = chain(filter_with(lambda g: g.is_possible()), map_to(lambda g: g.id), sum)
 print(part1(games))
-
-# for i in part1(games):
-#     print(i)
