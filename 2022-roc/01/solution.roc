@@ -15,23 +15,24 @@ solution = \part ->
 
 puzzleInput = sample
 
-part1 = puzzleInput 
+process : Str -> List I32
+process = \string -> string
     |> Str.split "\n\n"
     |> List.map (\item -> Str.split item "\n")
     |> List.map (\sublist -> 
         List.keepOks sublist Str.toI32
         |> List.sum
     )
+
+part1 = puzzleInput 
+    |> process
     |> List.sortDesc
     |> List.first
     |> Result.map \highest -> "highest \(Num.toStr highest)"
     |> Result.withDefault "There was an error"
 
-part2 =
-    part1
-    |> Str.toScalars
-    |> List.reverse
-    |> List.walk
-        ""
-        (\state, element -> Str.appendScalar state element
-            |> Result.withDefault "?")
+part2 = puzzleInput
+    |> process
+    |> List.takeFirst 3
+    |> List.sum
+    |> Num.toStrcd 
