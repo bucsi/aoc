@@ -30,4 +30,5 @@ packages = [
 [requirements]
 gladvent = { path = "../../gladvent" }
 gleam_stdlib = { version = ">= 0.34.0 and < 2.0.0" }
+glearray = { version = ">= 0.2.2 and < 1.0.0"}
 gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
