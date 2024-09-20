@@ -1,5 +1,6 @@
 name = "solutions_gleam"
 version = "1.0.0"
+gleam = ">= 1.5.0"
 
 # Fill out these fields if you intend to generate HTML documentation or publish
 # your project to the Hex package manager.
@@ -13,9 +14,9 @@ version = "1.0.0"
 # https://gleam.run/writing-gleam/gleam-toml/.
 
 [dependencies]
-gleam_stdlib = ">= 0.34.0 and < 2.0.0"
-# gladvent = ">= 0.7.3 and < 1.0.0"
-gladvent = { path = "../../gladvent" }
+gleam_stdlib = ">= 0.40.0 and < 2.0.0"
+gladvent = ">= 1.0.1 and < 2.0.0"
+# gladvent = { path = "../../gladvent" }
 glearray = ">= 0.2.2 and < 1.0.0"
 
 [dev-dependencies]
