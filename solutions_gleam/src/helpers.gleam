@@ -12,7 +12,7 @@ pub fn parse_int(from s: String) -> Int {
   }
 }
 
-pub fn get(from d: Dict(String, a), key key: String) -> a {
+pub fn get(from d: Dict(k, v), key key: k) -> v {
   case dict.get(d, key) {
     Ok(v) -> v
     Error(_) -> panic
