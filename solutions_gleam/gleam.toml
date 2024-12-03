@@ -21,3 +21,8 @@ glearray = ">= 0.2.2 and < 1.0.0"
 
 [dev-dependencies]
 gleeunit = ">= 1.0.0 and < 2.0.0"
+
+# gladvent expectations
+[gladvent.2024.1]
+pt_1 = 2815556
+pt_2 = 23927637

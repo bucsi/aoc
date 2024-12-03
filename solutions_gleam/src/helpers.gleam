@@ -29,3 +29,14 @@ pub fn at(array: Array(a), index: Int) -> a {
     Error(_) -> panic
   }
 }
+pub fn count_occurences(list: List(a)) -> Dict(a, Int) {
+  list
+  |> list.fold(dict.new(), fn(dict, elem) {
+    dict.upsert(dict, elem, fn(value) {
+      case value {
+        Some(value) -> value + 1
+        None -> 1
+      }
+    })
+  })
+}

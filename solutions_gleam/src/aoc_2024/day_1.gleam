@@ -1,6 +1,7 @@
 import gleam/dict.{type Dict}
 import gleam/int
 import gleam/list
+import gleam/option.{None, Some}
 import gleam/string
 
 import helpers
@@ -29,23 +30,15 @@ pub fn pt_1(input: #(List(Int), List(Int))) -> Int {
 
 pub fn pt_2(input: #(List(Int), List(Int))) {
   let #(fst, snd) = input
-  let occurences = occurence(snd)
+  let occurences = helpers.count_occurences(snd)
   fst
-  |> list.map(fn(x) {
-    let occurence = case dict.get(occurences, x) {
-      Ok(occurence) -> x * occurence
-      Error(_) -> 0
-    }
-  })
+  |> list.map(similarity_score(_, occurences))
   |> int.sum
 }
 
-fn occurence(list: List(Int)) -> Dict(Int, Int) {
-  list
-  |> list.fold(dict.new(), fn(acc, x) {
-    case dict.get(acc, x) {
-      Ok(v) -> dict.insert(acc, x, v + 1)
-      Error(_) -> dict.insert(acc, x, 1)
-    }
-  })
+fn similarity_score(value, occurences) {
+  case dict.get(occurences, value) {
+    Ok(occurence) -> value * occurence
+    Error(_) -> 0
+  }
 }
