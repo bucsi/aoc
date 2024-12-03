@@ -1,5 +1,7 @@
 import gleam/dict.{type Dict}
 import gleam/int
+import gleam/list
+import gleam/option.{None, Some}
 
 import gleam/io
 
@@ -29,6 +31,7 @@ pub fn at(array: Array(a), index: Int) -> a {
     Error(_) -> panic
   }
 }
+
 pub fn count_occurences(list: List(a)) -> Dict(a, Int) {
   list
   |> list.fold(dict.new(), fn(dict, elem) {
@@ -39,4 +42,8 @@ pub fn count_occurences(list: List(a)) -> Dict(a, Int) {
       }
     })
   })
+}
+
+pub fn eq(lhs, rhs) {
+  lhs == rhs
 }
