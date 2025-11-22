@@ -1,7 +1,7 @@
 import gleam/bool
 import gleam/int
 import gleam/list
-import gleam/option.{type Option, None, Some}
+import gleam/option.{type Option, Some}
 import gleam/order.{type Order}
 import gleam/string
 
@@ -11,7 +11,7 @@ pub fn parse(input: String) -> List(List(Int)) {
   input
   |> string.split("\n")
   |> list.map(string.split(_, " "))
-  |> list.map(list.map(_, helpers.parse_int(_)))
+  |> list.map(list.map(_, helpers.parse_int))
 }
 
 pub fn pt_1(input: List(List(Int))) {
@@ -85,7 +85,7 @@ fn is_valid_with_skip(row: List(Int), skip: Int) -> Accumulator {
   )
 }
 
-fn first(acc: Accumulator, value: Int) -> Accumulator {
+fn first(_acc: Accumulator, value: Int) -> Accumulator {
   Accumulator(option.Some(value), option.None, True)
 }
 

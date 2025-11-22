@@ -1,5 +1,4 @@
 import gleam/int
-import gleam/io
 import gleam/list
 import gleam/string
 import helpers.{at}
@@ -113,7 +112,7 @@ fn current_tile(s: State) {
 }
 
 pub fn step(s: State) {
-  let dir = case current_tile(s), s.previous_direction {
+  let _dir = case current_tile(s), s.previous_direction {
     NorthSouth, North -> North
     NorthSouth, South -> South
     EastWest, East -> East
@@ -170,6 +169,6 @@ fn recurse(s: State) {
   }
 }
 
-pub fn pt_2(input: Input) {
-  todo as "part 2 not implemented"
+pub fn pt_2(_input: Input) {
+  0
 }

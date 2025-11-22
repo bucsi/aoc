@@ -1,6 +1,5 @@
 import gleam/bool
 import gleam/dict.{type Dict}
-import gleam/io
 import gleam/list.{Continue, Stop}
 import gleam/string
 import gleam/yielder

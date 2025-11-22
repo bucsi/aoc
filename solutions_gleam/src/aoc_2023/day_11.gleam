@@ -1,5 +1,3 @@
-import gleam/dict
-import gleam/io
 import gleam/list
 import gleam/string
 
@@ -30,8 +28,8 @@ pub fn pt_1(input: String) {
     |> list.map(glearray.from_list)
     |> glearray.from_list
 
-  let col_length = glearray.length(array) - 1
-  let row_length = glearray.length(array |> at(0)) - 1
+  let _col_length = glearray.length(array) - 1
+  let _row_length = glearray.length(array |> at(0)) - 1
 
   todo
   // let map =
@@ -52,6 +50,6 @@ fn create_empty_row(row_length) {
   |> glearray.from_list
 }
 
-pub fn pt_2(input: String) {
-  todo as "part 2 not implemented"
+pub fn pt_2(_input: String) {
+  0
 }

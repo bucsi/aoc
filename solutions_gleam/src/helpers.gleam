@@ -3,8 +3,6 @@ import gleam/int
 import gleam/list
 import gleam/option.{None, Some}
 
-import gleam/io
-
 import glearray.{type Array}
 
 pub fn parse_int(from s: String) -> Int {
