@@ -1,9 +1,9 @@
 import gleam/bool
 import gleam/dict.{type Dict}
 import gleam/io
-import gleam/iterator
 import gleam/list.{Continue, Stop}
 import gleam/string
+import gleam/yielder
 import helpers.{get}
 
 pub type Dir {
@@ -61,9 +61,9 @@ pub fn pt_1(input: Data) {
   use <- bool.guard(True, State(0, "AAA"))
 
   input.directions
-  |> iterator.from_list
-  |> iterator.cycle
-  |> iterator.fold_until(State(0, "AAA"), fn(state, direction) {
+  |> yielder.from_list
+  |> yielder.cycle
+  |> yielder.fold_until(State(0, "AAA"), fn(state, direction) {
     let node = input.graph |> get(state.current)
     let next = case direction {
       L -> node.left
@@ -92,9 +92,9 @@ pub fn pt_2(input: Data) {
     })
 
   input.directions
-  |> iterator.from_list
-  |> iterator.cycle
-  |> iterator.fold_until(State2(0, starts), fn(state, direction) {
+  |> yielder.from_list
+  |> yielder.cycle
+  |> yielder.fold_until(State2(0, starts), fn(state, direction) {
     let new_nodes =
       state.currents
       |> list.fold(#([], True), fn(state, node) {
@@ -113,7 +113,7 @@ pub fn pt_2(input: Data) {
         #(list, is_end)
       })
 
-    io.debug(state.steps)
+    state.steps |> echo
     case new_nodes.1 {
       True -> Stop(State2(state.steps + 1, new_nodes.0))
       False -> Continue(State2(state.steps + 1, new_nodes.0))

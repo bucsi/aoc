@@ -1,8 +1,8 @@
 import gleam/int
 import gleam/io
-import gleam/iterator
 import gleam/list
 import gleam/string
+import gleam/yielder
 import helpers.{parse_int}
 
 pub type Maps {
@@ -112,17 +112,17 @@ pub fn pt_2(input: String) {
     })
     |> make_maps
   seeds
-  |> iterator.from_list
-  |> iterator.map(fn(s) {
-    iterator.from_list([s.start_id, s.start_id + s.length])
+  |> yielder.from_list
+  |> yielder.map(fn(s) {
+    yielder.from_list([s.start_id, s.start_id + s.length])
   })
-  |> iterator.flatten
-  |> iterator.map(process(_, maps.seed_to_soil))
-  |> iterator.map(process(_, maps.soil_to_fertilizer))
-  |> iterator.map(process(_, maps.fertilizer_to_water))
-  |> iterator.map(process(_, maps.water_to_light))
-  |> iterator.map(process(_, maps.light_to_temperature))
-  |> iterator.map(process(_, maps.temperature_to_humidity))
-  |> iterator.map(process(_, maps.humidity_to_location))
-  |> iterator.reduce(int.min)
+  |> yielder.flatten
+  |> yielder.map(process(_, maps.seed_to_soil))
+  |> yielder.map(process(_, maps.soil_to_fertilizer))
+  |> yielder.map(process(_, maps.fertilizer_to_water))
+  |> yielder.map(process(_, maps.water_to_light))
+  |> yielder.map(process(_, maps.light_to_temperature))
+  |> yielder.map(process(_, maps.temperature_to_humidity))
+  |> yielder.map(process(_, maps.humidity_to_location))
+  |> yielder.reduce(int.min)
 }

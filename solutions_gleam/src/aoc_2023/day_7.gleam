@@ -60,7 +60,7 @@ pub fn pt_2(hands: List(Hand)) {
   |> list.sort(make_compare(compare_value2))
   |> list.index_map(fn(hand, i) {
     io.print("p2  " <> int.to_string(i) <> "   ")
-    io.debug(hand)
+    echo hand
     { i + 1 } * hand.bet
   })
   |> int.sum
@@ -105,7 +105,7 @@ fn is_highcard(a, b, c, d, e) {
 }
 
 fn debug_nothing(cards) {
-  io.debug(cards)
+  echo cards
 
   Nothing
 }
