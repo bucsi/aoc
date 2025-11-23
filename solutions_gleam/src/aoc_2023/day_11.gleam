@@ -30,8 +30,7 @@ pub fn pt_1(input: String) {
 
   let _col_length = glearray.length(array) - 1
   let _row_length = glearray.length(array |> at(0)) - 1
-
-  todo
+  // todo
   // let map =
   //   list.range(0, col_length)
   //   |> list.fold(from: dict.new(), with: fn(map, col) {
@@ -44,11 +43,11 @@ pub fn pt_1(input: String) {
   //   })
 }
 
-fn create_empty_row(row_length) {
-  list.range(0, row_length)
-  |> list.map(fn(_) { Empty })
-  |> glearray.from_list
-}
+// fn create_empty_row(row_length) {
+//   list.range(0, row_length)
+//   |> list.map(fn(_) { Empty })
+//   |> glearray.from_list
+// }
 
 pub fn pt_2(_input: String) {
   0
