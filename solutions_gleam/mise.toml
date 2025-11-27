@@ -8,6 +8,16 @@ run = '''
 gleam run -- run --year=${usage_year?} ${usage_day?}
 '''
 
+[tasks.example]
+description = "Run solution using gladvent"
+usage = '''
+arg "<day>"
+arg "[year]" default="2024"
+'''
+run = '''
+gleam run -- run --year=${usage_year?} ${usage_day?} --example
+'''
+
 [tasks.new]
 description = "New solution using gladvent"
 usage = '''
@@ -15,5 +25,5 @@ arg "<day>"
 arg "[year]" default="2024"
 '''
 run = '''
-gleam run -- new --year=${usage_year?} ${usage_day?}
+gleam run -- new --year=${usage_year?} ${usage_day?} --example
 '''
