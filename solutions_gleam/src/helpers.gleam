@@ -5,6 +5,10 @@ import gleam/option.{None, Some}
 
 import glearray.{type Array}
 
+pub type Coord(a) {
+  Coord(x: a, y: a)
+}
+
 pub fn parse_int(from s: String) -> Int {
   case int.parse(s) {
     Ok(i) -> i
