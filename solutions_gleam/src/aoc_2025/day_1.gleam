@@ -29,25 +29,50 @@ pub type State {
 }
 
 pub fn pt_1(input: List(Op)) {
-  use State(at:, times_at_zero:), op <- list.fold(input, State(50, 0))
-  let distance = case op {
-    Left(distance:) -> -distance
-    Right(distance:) -> distance
-  }
+  {
+    use State(at:, times_at_zero:), op <- list.fold(input, State(50, 0))
+    let currently_at = at
+    let current_times_at_zero = times_at_zero
+    let at = at |> rotate_dial(op)
 
-  let at = case at + distance {
-    underflow if underflow < 0 -> 100 - underflow
-    overflow if overflow > 99 -> -1 + overflow
+    let times_at_zero = case at {
+      0 -> times_at_zero + 1
+      _ -> times_at_zero
+    }
 
+    case at < 0 || at > 99 {
+      True ->
+        panic as {
+          "Dial rotated out of bounds to "
+          <> int.to_string(at)
+          <> " by rotating from "
+          <> int.to_string(currently_at)
+          <> "by"
+          <> case op {
+            Left(distance:) -> " Left " <> int.to_string(distance)
+            Right(distance:) -> " Right " <> int.to_string(distance)
+          }
+        }
+      _ -> Nil
+    }
+
+    State(at:, times_at_zero:)
+  }.times_at_zero
+}
+
+pub fn rotate_dial(starting_position at: Int, rotation op: Op) -> Int {
+  let distance =
+    case op {
+      Left(distance:) -> -distance
+      Right(distance:) -> distance
+    }
+    % 100
+
+  case at + distance {
+    overflow if overflow > 99 -> overflow - 100
+    underflow if underflow < 0 -> underflow + 100
     otherwise -> otherwise
   }
-
-  let times_at_zero = case at {
-    0 -> times_at_zero + 1
-    _ -> times_at_zero
-  }
-
-  State(at:, times_at_zero:) |> echo
 }
 
 pub fn pt_2(input: List(Op)) {
