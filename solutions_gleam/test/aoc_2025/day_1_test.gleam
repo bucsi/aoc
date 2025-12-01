@@ -1,43 +1,20 @@
-import aoc_2025/day_1.{Left, Right, rotate_dial}
+import gleam/list
 
-pub fn rotate_in_bounds_right_test() {
-  let result = rotate_dial(50, Right(10))
+import aoc_2025/day_1.{Left, Right, rotate_dial_pt2_dumb}
 
-  assert result == 60
-}
-
-pub fn rotate_in_bounds_left_test() {
-  let result = rotate_dial(50, Left(10))
-
-  assert result == 40
-}
-
-pub fn rotate_out_of_bounds_right_test() {
-  let result = rotate_dial(50, Right(60))
-
-  assert result == 10
-}
-
-pub fn rotate_out_of_bounds_left_test() {
-  let result = rotate_dial(50, Left(60))
-
-  assert result == 90
-}
-
-pub fn rotate_to_bound_left_test() {
-  let result = rotate_dial(50, Left(50))
-
-  assert result == 0
-}
-
-pub fn rotate_to_bound_right_test() {
-  let result = rotate_dial(50, Right(50))
-
-  assert result == 0
-}
-
-pub fn rotate_multiple_times() {
-  let result = rotate_dial(25, Right(625))
-
-  assert result == 25
+pub fn test_rotate_dial_pt2_dumb_test() {
+  use
+    #(test_name, starting_position, rotation, #(expected_value, expected_zeros))
+  <- list.each([
+    #("rotate right within bounds", 5, Right(4), #(9, 0)),
+    #("rotate left within bounds", 2, Left(1), #(1, 0)),
+    #("rotate left with wrap around", 2, Left(5), #(97, 1)),
+    #("rotate right with wrap around", 99, Right(4), #(3, 1)),
+    #("rotate left full circle", 0, Left(100), #(0, 1)),
+    #("rotate right full circle", 0, Right(100), #(0, 1)),
+    #("rotate ten times", 1, Right(1000), #(1, 10)),
+  ])
+  assert rotate_dial_pt2_dumb(starting_position:, rotation:)
+    == #(expected_value, expected_zeros)
+    as test_name
 }
