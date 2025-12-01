@@ -31,29 +31,11 @@ pub type State {
 pub fn pt_1(input: List(Op)) {
   {
     use State(at:, times_at_zero:), op <- list.fold(input, State(50, 0))
-    let currently_at = at
-    let current_times_at_zero = times_at_zero
     let at = at |> rotate_dial(op)
 
     let times_at_zero = case at {
       0 -> times_at_zero + 1
       _ -> times_at_zero
-    }
-
-    case at < 0 || at > 99 {
-      True ->
-        panic as {
-          "Dial rotated out of bounds to "
-          <> int.to_string(at)
-          <> " by rotating from "
-          <> int.to_string(currently_at)
-          <> "by"
-          <> case op {
-            Left(distance:) -> " Left " <> int.to_string(distance)
-            Right(distance:) -> " Right " <> int.to_string(distance)
-          }
-        }
-      _ -> Nil
     }
 
     State(at:, times_at_zero:)
