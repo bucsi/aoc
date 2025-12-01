@@ -2,7 +2,7 @@
 description = "Run solution using gladvent"
 usage = '''
 arg "<day>"
-arg "[year]" default="2024"
+arg "[year]" default="2025"
 '''
 run = '''
 gleam run -- run --year=${usage_year?} ${usage_day?} --timed
@@ -12,7 +12,7 @@ gleam run -- run --year=${usage_year?} ${usage_day?} --timed
 description = "Run solution using gladvent"
 usage = '''
 arg "<day>"
-arg "[year]" default="2024"
+arg "[year]" default="2025"
 '''
 run = '''
 gleam run -- run --year=${usage_year?} ${usage_day?} --example --timed
@@ -22,7 +22,7 @@ gleam run -- run --year=${usage_year?} ${usage_day?} --example --timed
 description = "New solution using gladvent"
 usage = '''
 arg "<day>"
-arg "[year]" default="2024"
+arg "[year]" default="2025"
 '''
 run = '''
 gleam run -- new --year=${usage_year?} ${usage_day?} --example
