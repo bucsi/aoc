@@ -2,6 +2,7 @@ import gleam/int
 import gleam/list
 import gleam/option
 import gleam/regexp
+import gleam/string
 import helpers
 
 fn regexp_options(multiline multi_line: Bool) {
@@ -38,9 +39,8 @@ pub fn pt_2(input: String) {
     as "Regexp compile failed"
 
   input
+  |> string.replace("\n", "")
   |> regexp.replace(dont_pattern, _, "")
-  |> echo
   |> regexp.replace(dont_pattern_end_of_file, _, "")
-  |> echo
   |> count_muls
 }
