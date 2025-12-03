@@ -16,6 +16,13 @@ pub fn parse_int(from s: String) -> Int {
   }
 }
 
+pub fn unwrap_result(result: Result(a, b)) -> a {
+  case result {
+    Ok(v) -> v
+    Error(_) -> panic
+  }
+}
+
 pub fn get(from d: Dict(k, v), key key: k) -> v {
   case dict.get(d, key) {
     Ok(v) -> v
