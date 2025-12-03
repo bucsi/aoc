@@ -49,3 +49,18 @@ pub fn count_occurences(list: List(a)) -> Dict(a, Int) {
 pub fn eq(lhs, rhs) {
   lhs == rhs
 }
+
+pub fn undigits(numbers: List(Int), base: Int) -> Result(Int, Nil) {
+  case base < 2 {
+    True -> Error(Nil)
+    False -> undigits_loop(numbers, base, 0)
+  }
+}
+
+fn undigits_loop(numbers: List(Int), base: Int, acc: Int) -> Result(Int, Nil) {
+  case numbers {
+    [] -> Ok(acc)
+    [digit, ..] if digit >= base -> Error(Nil)
+    [digit, ..rest] -> undigits_loop(rest, base, acc * base + digit)
+  }
+}
