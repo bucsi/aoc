@@ -54,8 +54,8 @@ pub fn pt_2(input: String) {
       rest_validations,
       #(0, lower, upper),
     )
-    case prev_upper > next_lower {
-      True -> #(valid_id_count, prev_lower, next_upper)
+    case prev_upper >= next_lower {
+      True -> #(valid_id_count, prev_lower, int.max(next_upper, prev_upper))
       _ -> #(
         valid_id_count + { prev_upper - prev_lower } + 1,
         next_lower,
