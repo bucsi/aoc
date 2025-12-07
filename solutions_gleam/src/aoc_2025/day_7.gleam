@@ -16,7 +16,7 @@ pub type Cell {
   Beam(BeamKind)
 }
 
-pub fn pt_1(input: helpers.GridResult(Cell)) {
+pub fn pt_1(input: helpers.ParsedGrid(Cell)) {
   let helpers.GridResult(manifold, rows:, cols:) = input
   // manifold |> print_manifold(rows, cols) |> io.println
   {
@@ -72,7 +72,7 @@ pub fn pt_1(input: helpers.GridResult(Cell)) {
 //   |> string.join("\n")
 // }
 
-pub fn parse(input: String) -> helpers.GridResult(Cell) {
+pub fn parse(input: String) -> helpers.ParsedGrid(Cell) {
   use c <- helpers.parse_grid(from: input, delimited_by: "\n", split_by: "")
   case c {
     "^" -> Splitter
@@ -82,7 +82,7 @@ pub fn parse(input: String) -> helpers.GridResult(Cell) {
   }
 }
 
-pub fn pt_2(input: helpers.GridResult(Cell)) {
+pub fn pt_2(input: helpers.ParsedGrid(Cell)) {
   let helpers.GridResult(manifold, rows:, cols:) = input
 
   let manifold = {

@@ -1,4 +1,5 @@
 import gleam/dict
+import gleam/function
 import gleam/int
 import gleam/list
 import gleam/regexp
@@ -76,21 +77,8 @@ fn parse_homework_item(from: String) -> HomeworkItem {
 }
 
 pub fn pt_2(input: String) {
-  let #(grid, rows, cols) = {
-    use #(dict, row, col), line, current_row <- list.index_fold(
-      input |> string.split("\n"),
-      #(dict.new(), 0, 0),
-    )
-    use #(dict, _, _), char, current_col <- list.index_fold(
-      line |> string.split(""),
-      #(dict, row, col),
-    )
-    #(
-      char |> dict.insert(dict, Coord(current_row, current_col), _),
-      current_row,
-      int.max(current_col, col),
-    )
-  }
+  let helpers.GridResult(grid, rows, cols) =
+    helpers.parse_grid(input, "\n", "", function.identity)
 
   {
     use col <- list.map(list.range(0, cols))

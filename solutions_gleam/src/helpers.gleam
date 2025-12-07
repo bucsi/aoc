@@ -77,7 +77,7 @@ fn undigits_loop(numbers: List(Int), base: Int, acc: Int) -> Result(Int, Nil) {
   }
 }
 
-pub type GridResult(a) {
+pub type ParsedGrid(a) {
   GridResult(grid: dict.Dict(Coord(Int), a), rows: Int, cols: Int)
 }
 
@@ -86,7 +86,7 @@ pub fn parse_grid(
   delimited_by row_separator: String,
   split_by cell_separator: String,
   using parse_fn: fn(String) -> a,
-) -> GridResult(a) {
+) -> ParsedGrid(a) {
   use state, line, row <- list.index_fold(
     input |> string.split(row_separator),
     GridResult(dict.new(), 0, 0),

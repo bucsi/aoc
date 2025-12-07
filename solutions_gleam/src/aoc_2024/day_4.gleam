@@ -1,5 +1,6 @@
 import gleam/bool
 import gleam/dict
+import gleam/function
 import gleam/int
 import gleam/list
 import gleam/result
@@ -7,22 +8,17 @@ import gleam/string
 
 import helpers.{type Coord, Coord}
 
-pub fn parse(input: String) -> #(dict.Dict(Coord(Int), String), Int, Int) {
-  use #(dict, rows, cols), line, index <- list.index_fold(
-    input |> string.split("\n"),
-    #(dict.new(), 0, 0),
+pub fn parse(input: String) {
+  helpers.parse_grid(
+    from: input,
+    delimited_by: "\n",
+    split_by: "",
+    using: function.identity,
   )
-  use #(dict, _, _), char, jndex <- list.index_fold(line |> string.split(""), #(
-    dict,
-    rows,
-    cols,
-  ))
-  // echo #("Putting char", char, "on coords", #(index, jndex))
-  #({ char |> dict.insert(dict, Coord(index, jndex), _) }, index, jndex)
 }
 
-pub fn pt_1(input: #(dict.Dict(Coord(Int), String), Int, Int)) {
-  let #(word_search, rows, cols) = input
+pub fn pt_1(input: helpers.ParsedGrid(String)) {
+  let helpers.GridResult(word_search, rows, cols) = input
   {
     use i <- list.map(list.range(0, rows))
     use j <- list.map(list.range(0, cols))
@@ -138,8 +134,8 @@ fn diagonal_down_right(
   )
 }
 
-pub fn pt_2(input: #(dict.Dict(Coord(Int), String), Int, Int)) {
-  let #(word_search, rows, cols) = input
+pub fn pt_2(input: helpers.ParsedGrid(String)) {
+  let helpers.GridResult(word_search, rows, cols) = input
   {
     use i <- list.map(list.range(0, rows))
     use j <- list.map(list.range(0, cols))
