@@ -7,6 +7,7 @@ import gleam/result
 import gleam/string
 
 import helpers.{Coord}
+import helpers/unsafe_int
 import helpers/unsafe_list
 
 pub type HomeworkItem {
@@ -72,7 +73,7 @@ fn parse_homework_item(from: String) -> HomeworkItem {
   case from {
     "+" -> Add
     "*" -> Multiply
-    string -> string |> helpers.parse_int |> Number
+    string -> string |> unsafe_int.parse |> Number
   }
 }
 

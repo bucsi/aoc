@@ -2,7 +2,8 @@ import gleam/dict
 import gleam/int
 import gleam/list
 import gleam/string
-import helpers
+
+import helpers/unsafe_int
 
 pub type Rule =
   fn(dict.Dict(Int, Int)) -> Bool
@@ -24,8 +25,8 @@ pub fn pt_1(input: String) {
     |> list.map(string.split(_, "|"))
     |> list.fold([], fn(rules, items) {
       let assert [earlier, later] = items as "earlier and later rule number"
-      let earlier = helpers.parse_int(earlier)
-      let later = helpers.parse_int(later)
+      let earlier = unsafe_int.parse(earlier)
+      let later = unsafe_int.parse(later)
 
       [make_rule(earlier, later), ..rules]
     })
@@ -61,7 +62,7 @@ fn get_middle_page(index_to_page: dict.Dict(Int, Int)) {
 }
 
 fn parse_updates(updates, item, index) -> Updates {
-  let page = item |> helpers.parse_int
+  let page = item |> unsafe_int.parse
   let Updates(page_to_index:, index_to_page:) = updates
   let page_to_index = page_to_index |> dict.insert(page, index)
   let index_to_page = index_to_page |> dict.insert(index, page)

@@ -1,7 +1,8 @@
 import gleam/int
 import gleam/list
 import gleam/string
-import helpers.{parse_int}
+
+import helpers/unsafe_int
 
 pub type Input {
   Input(lines: List(List(Int)))
@@ -12,7 +13,7 @@ pub fn parse(input: String) -> #(Input, Input) {
     input
     |> string.split("\n")
     |> list.map(string.split(_, " "))
-    |> list.map(list.map(_, parse_int))
+    |> list.map(list.map(_, unsafe_int.parse))
 
   let reversed =
     numbers

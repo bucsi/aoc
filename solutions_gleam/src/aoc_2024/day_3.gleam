@@ -3,7 +3,8 @@ import gleam/list
 import gleam/option
 import gleam/regexp
 import gleam/string
-import helpers
+
+import helpers/unsafe_int
 
 fn regexp_options(multiline multi_line: Bool) {
   regexp.Options(case_insensitive: False, multi_line:)
@@ -22,8 +23,8 @@ fn count_muls(input: String) -> Int {
   |> regexp.scan(pattern, _)
   |> list.map(fn(match: regexp.Match) {
     let assert regexp.Match(_, [option.Some(left), option.Some(right)]) = match
-    let left_int = helpers.parse_int(left)
-    let right_int = helpers.parse_int(right)
+    let left_int = unsafe_int.parse(left)
+    let right_int = unsafe_int.parse(right)
     left_int * right_int
   })
   |> int.sum

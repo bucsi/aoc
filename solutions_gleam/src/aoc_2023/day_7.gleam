@@ -4,7 +4,8 @@ import gleam/io
 import gleam/list
 import gleam/order.{type Order}
 import gleam/string
-import helpers.{parse_int}
+
+import helpers/unsafe_int
 
 pub type Hand {
   Hand(cards: List(String), bet: Int, kind: Kind, original: String)
@@ -22,7 +23,7 @@ fn parse_hand(hand: List(String)) -> Hand {
 
   let sorted_cards = cards |> string.to_graphemes |> list.sort(compare_value)
 
-  Hand(sorted_cards, parse_int(bet), Nothing, cards)
+  Hand(sorted_cards, unsafe_int.parse(bet), Nothing, cards)
 }
 
 pub type Kind {
@@ -152,7 +153,7 @@ fn compare_value(a: String, b: String) -> Order {
     _, "J" -> order.Gt
     "T", _ -> order.Lt
     _, "T" -> order.Gt
-    _, _ -> int.compare(parse_int(b_first), parse_int(a_first))
+    _, _ -> int.compare(unsafe_int.parse(b_first), unsafe_int.parse(a_first))
   }
 }
 
@@ -232,7 +233,7 @@ fn compare_value2(a: String, b: String) -> Order {
     _, "Q" -> order.Gt
     "T", _ -> order.Lt
     _, "T" -> order.Gt
-    _, _ -> int.compare(parse_int(b_first), parse_int(a_first))
+    _, _ -> int.compare(unsafe_int.parse(b_first), unsafe_int.parse(a_first))
   }
 }
 

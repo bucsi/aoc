@@ -3,7 +3,8 @@ import gleam/dict.{type Dict}
 import gleam/list.{Continue, Stop}
 import gleam/string
 import gleam/yielder
-import helpers.{get}
+
+import helpers/unsafe_dict
 
 pub type Dir {
   L
@@ -63,7 +64,7 @@ pub fn pt_1(input: Data) {
   |> yielder.from_list
   |> yielder.cycle
   |> yielder.fold_until(State(0, "AAA"), fn(state, direction) {
-    let node = input.graph |> get(state.current)
+    let node = input.graph |> unsafe_dict.get(state.current)
     let next = case direction {
       L -> node.left
       R -> node.right
@@ -98,8 +99,8 @@ pub fn pt_2(input: Data) {
       state.currents
       |> list.fold(#([], True), fn(state, node) {
         let new = case direction {
-          L -> input.graph |> get(node.left)
-          R -> input.graph |> get(node.right)
+          L -> input.graph |> unsafe_dict.get(node.left)
+          R -> input.graph |> unsafe_dict.get(node.right)
         }
 
         let list = [new, ..state.0]

@@ -1,7 +1,10 @@
 import gleam/int
 import gleam/list
 import gleam/string
+
 import helpers
+import helpers/unsafe_int
+import helpers/unsafe_result
 
 import iv
 
@@ -10,7 +13,7 @@ pub fn pt_1(input: String) {
   |> string.split("\n")
   |> list.map(string.split(_, ""))
   |> list.map(list.combination_pairs)
-  |> list.map(list.map(_, fn(tpl) { { tpl.0 <> tpl.1 } |> helpers.parse_int }))
+  |> list.map(list.map(_, fn(tpl) { { tpl.0 <> tpl.1 } |> unsafe_int.parse }))
   |> list.map(fn(possible_joltages) {
     let assert Ok(max_joltage) = possible_joltages |> list.max(int.compare)
     max_joltage
@@ -22,7 +25,7 @@ pub fn pt_2(input: String) {
   input
   |> string.split("\n")
   |> list.map(string.split(_, ""))
-  |> list.map(list.map(_, helpers.parse_int))
+  |> list.map(list.map(_, unsafe_int.parse))
   |> list.map(get_max_joltage)
   |> int.sum
 }
@@ -57,7 +60,7 @@ fn max_joltage_loop(
       digits_selected
       |> iv.to_list
       |> helpers.undigits(10)
-      |> helpers.unwrap_result
+      |> unsafe_result.unwrap
 
     _ ->
       max_joltage_loop(

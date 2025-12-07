@@ -1,6 +1,7 @@
 import gleam/list
 import gleam/string
-import helpers
+
+import helpers/unsafe_int
 
 pub type Op {
   Left(distance: Int)
@@ -15,8 +16,8 @@ pub fn parse(input: String) -> List(Op) {
       as "dirty split"
 
     case direction {
-      "L" -> Left(distance |> helpers.parse_int)
-      "R" -> Right(distance |> helpers.parse_int)
+      "L" -> Left(distance |> unsafe_int.parse)
+      "R" -> Right(distance |> unsafe_int.parse)
 
       other -> panic as { "invalid direction " <> other }
     }

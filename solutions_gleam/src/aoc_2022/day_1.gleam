@@ -1,13 +1,14 @@
 import gleam/int
 import gleam/list
 import gleam/string
-import helpers.{parse_int}
+
+import helpers/unsafe_int
 
 pub fn parse(input: String) -> List(Elf) {
   input
   |> string.split("\n\n")
   |> list.map(string.split(_, "\n"))
-  |> list.map(list.map(_, parse_int))
+  |> list.map(list.map(_, unsafe_int.parse))
   |> list.map(int.sum)
   |> list.map(Elf)
   |> list.sort(fn(other, elf) { int.compare(elf.calories, other.calories) })

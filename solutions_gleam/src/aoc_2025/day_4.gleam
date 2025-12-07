@@ -2,7 +2,6 @@ import gleam/dict
 import gleam/function
 import gleam/list
 import gleam/result
-import gleam/string
 
 import helpers.{type Coord, Coord}
 

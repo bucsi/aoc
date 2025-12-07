@@ -2,7 +2,8 @@ import gleam/function
 import gleam/int
 import gleam/list
 import gleam/string
-import helpers
+
+import helpers/unsafe_int
 
 fn make_validity_function(lower: Int, upper: Int) -> fn(Int) -> Bool {
   fn(id: Int) { lower <= id && id <= upper }
@@ -15,8 +16,8 @@ pub fn pt_1(input: String) {
     |> string.split("\n")
     |> list.map(fn(validation) {
       let assert [lower, upper] = validation |> string.split("-")
-      let lower = helpers.parse_int(lower)
-      let upper = helpers.parse_int(upper)
+      let lower = unsafe_int.parse(lower)
+      let upper = unsafe_int.parse(upper)
 
       make_validity_function(lower, upper)
     })
@@ -24,7 +25,7 @@ pub fn pt_1(input: String) {
   ids
   |> string.split("\n")
   |> list.map(fn(id) {
-    let id = helpers.parse_int(id)
+    let id = unsafe_int.parse(id)
     use validation <- list.map(validations)
     validation(id)
   })
@@ -39,8 +40,8 @@ pub fn pt_2(input: String) {
     |> string.split("\n")
     |> list.map(fn(validation) {
       let assert [lower, upper] = validation |> string.split("-")
-      let lower = helpers.parse_int(lower)
-      let upper = helpers.parse_int(upper)
+      let lower = unsafe_int.parse(lower)
+      let upper = unsafe_int.parse(upper)
 
       #(lower, upper)
     })

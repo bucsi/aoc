@@ -6,12 +6,13 @@ import gleam/order.{type Order}
 import gleam/string
 
 import helpers
+import helpers/unsafe_int
 
 pub fn parse(input: String) -> List(List(Int)) {
   input
   |> string.split("\n")
   |> list.map(string.split(_, " "))
-  |> list.map(list.map(_, helpers.parse_int))
+  |> list.map(list.map(_, unsafe_int.parse))
 }
 
 pub fn pt_1(input: List(List(Int))) {

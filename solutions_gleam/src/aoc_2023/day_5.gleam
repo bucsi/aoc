@@ -2,7 +2,8 @@ import gleam/int
 import gleam/list
 import gleam/string
 import gleam/yielder
-import helpers.{parse_int}
+
+import helpers/unsafe_int
 
 pub type Maps {
   Maps(
@@ -33,7 +34,7 @@ fn make_maps(list) {
 pub fn pt_1(input: String) {
   let assert [seeds, ..maps] = string.split(input, "\n\n")
   let assert [_, seeds] = string.split(seeds, ": ")
-  let seeds = seeds |> string.split(" ") |> list.map(parse_int)
+  let seeds = seeds |> string.split(" ") |> list.map(unsafe_int.parse)
 
   let maps =
     list.map(maps, fn(map) {
@@ -41,7 +42,7 @@ pub fn pt_1(input: String) {
 
       map_items
       |> list.map(fn(item) {
-        item |> string.split(" ") |> list.map(parse_int) |> make_map
+        item |> string.split(" ") |> list.map(unsafe_int.parse) |> make_map
       })
     })
     |> make_maps
@@ -94,8 +95,8 @@ pub fn pt_2(input: String) {
       |> string.split(" ")
       |> list.index_fold(#([], 0), fn(acc, curr, i) {
         case i % 2 {
-          0 -> #(acc.0, parse_int(curr))
-          _ -> #([SeedRange(acc.1, parse_int(curr)), ..acc.0], 0)
+          0 -> #(acc.0, unsafe_int.parse(curr))
+          _ -> #([SeedRange(acc.1, unsafe_int.parse(curr)), ..acc.0], 0)
         }
       })
     }.0
@@ -106,7 +107,7 @@ pub fn pt_2(input: String) {
 
       map_items
       |> list.map(fn(item) {
-        item |> string.split(" ") |> list.map(parse_int) |> make_map
+        item |> string.split(" ") |> list.map(unsafe_int.parse) |> make_map
       })
     })
     |> make_maps

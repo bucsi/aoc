@@ -2,7 +2,8 @@ import gleam/bool
 import gleam/int
 import gleam/list
 import gleam/string
-import helpers
+
+import helpers/unsafe_int
 
 pub type Range {
   Range(start: Int, end: Int)
@@ -14,8 +15,8 @@ pub fn parse(input: String) {
   |> list.map(string.split(_, "-"))
   |> list.map(fn(pairs) {
     let assert [start, end] = pairs as "after splitting range by -"
-    let start = helpers.parse_int(start)
-    let end = helpers.parse_int(end)
+    let start = unsafe_int.parse(start)
+    let end = unsafe_int.parse(end)
 
     Range(start:, end:)
   })

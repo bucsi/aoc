@@ -4,12 +4,13 @@ import gleam/list
 import gleam/string
 
 import helpers
+import helpers/unsafe_int
 
 pub fn parse(input: String) -> #(List(Int), List(Int)) {
   input
   |> string.split("\n")
   |> list.map(string.split(_, "   "))
-  |> list.map(list.map(_, helpers.parse_int))
+  |> list.map(list.map(_, unsafe_int.parse))
   |> list.flatten
   |> list.index_fold(#([], []), fn(acc, x, i) {
     case i % 2 {

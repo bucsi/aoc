@@ -2,7 +2,7 @@ import gleam/int
 import gleam/list
 import gleam/string
 
-import helpers.{parse_int}
+import helpers/unsafe_int
 
 pub type Game {
   Game(id: Int, rounds: List(Round))
@@ -30,9 +30,9 @@ fn parse_round(from: String) {
   |> list.map(string.split(_, " "))
   |> list.fold(Round(0, 0, 0), fn(r, i) {
     case i {
-      [n, "red"] -> Round(..r, red: parse_int(n))
-      [n, "green"] -> Round(..r, green: parse_int(n))
-      [n, "blue"] -> Round(..r, blue: parse_int(n))
+      [n, "red"] -> Round(..r, red: unsafe_int.parse(n))
+      [n, "green"] -> Round(..r, green: unsafe_int.parse(n))
+      [n, "blue"] -> Round(..r, blue: unsafe_int.parse(n))
       _ -> panic
     }
   })
