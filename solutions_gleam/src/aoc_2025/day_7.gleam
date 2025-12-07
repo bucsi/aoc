@@ -1,9 +1,7 @@
 import gleam/bool
 import gleam/dict
-import gleam/int
 import gleam/list
 import gleam/option
-import gleam/string
 
 import helpers.{Coord}
 
@@ -54,25 +52,25 @@ pub fn pt_1(input: helpers.GridResult(Cell)) {
   }.0
 }
 
-fn print_manifold(manifold, rows, cols) {
-  {
-    use row <- list.map(list.range(0, rows))
-    {
-      use col <- list.map(list.range(0, cols))
-      case manifold |> dict.get(Coord(row, col)) {
-        Ok(Beam(Pt1)) -> "|"
-        Ok(Beam(Pt2(value:))) -> {
-          value |> int.to_base36
-        }
-        Ok(Empty) -> "."
-        Ok(Splitter) -> "^"
-        _ -> panic as "unexpected cell in manifold"
-      }
-    }
-    |> string.join("")
-  }
-  |> string.join("\n")
-}
+// fn print_manifold(manifold, rows, cols) {
+//   {
+//     use row <- list.map(list.range(0, rows))
+//     {
+//       use col <- list.map(list.range(0, cols))
+//       case manifold |> dict.get(Coord(row, col)) {
+//         Ok(Beam(Pt1)) -> "|"
+//         Ok(Beam(Pt2(value:))) -> {
+//           value |> int.to_base36
+//         }
+//         Ok(Empty) -> "."
+//         Ok(Splitter) -> "^"
+//         _ -> panic as "unexpected cell in manifold"
+//       }
+//     }
+//     |> string.join("")
+//   }
+//   |> string.join("\n")
+// }
 
 pub fn parse(input: String) -> helpers.GridResult(Cell) {
   use c <- helpers.parse_grid(from: input, delimited_by: "\n", split_by: "")

@@ -1,4 +1,3 @@
-import gleam/bool
 import gleam/dict
 import gleam/int
 import gleam/list
@@ -82,6 +81,6 @@ fn make_rule(earlier: Int, later: Int) -> Rule {
   }
 }
 
-pub fn pt_2(input: String) {
-  todo as "part 2 not implemented"
+pub fn pt_2(_input: String) {
+  "todo"
 }

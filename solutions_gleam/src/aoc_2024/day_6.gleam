@@ -85,7 +85,6 @@ fn next_state(state: State) {
     Ok(Obstacle) -> rotate(state)
     Ok(Empty) | Ok(GuardVisited) -> step(state, next_guard_pos)
     Error(Nil) -> state
-    _ -> panic as "Unexpected cell ahead of guard"
   }
 }
 
@@ -112,6 +111,6 @@ fn get_next_guard_pos(state: State) {
   }
 }
 
-pub fn pt_2(input: State) {
-  todo as "part 2 not implemented"
+pub fn pt_2(_input: State) {
+  "todo"
 }

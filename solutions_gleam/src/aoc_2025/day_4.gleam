@@ -1,6 +1,5 @@
 import gleam/dict
 import gleam/function
-import gleam/io
 import gleam/list
 import gleam/result
 import gleam/string
@@ -54,17 +53,17 @@ pub fn pt_1(map: #(dict.Dict(Coord(Int), Cell), Int, Int)) {
   |> list.length
 }
 
-fn dump(l: List(Bool)) {
-  list.each(l, fn(i) {
-    io.print(case i {
-      True -> "x"
-      _ -> "."
-    })
-  })
-  io.println("")
+// fn dump(l: List(Bool)) {
+//   list.each(l, fn(i) {
+//     io.print(case i {
+//       True -> "x"
+//       _ -> "."
+//     })
+//   })
+//   io.println("")
 
-  l
-}
+//   l
+// }
 
 fn neighbors(map: dict.Dict(Coord(Int), Cell), x: Int, y: Int) -> List(Cell) {
   // echo Coord(x, y) as "checking"
