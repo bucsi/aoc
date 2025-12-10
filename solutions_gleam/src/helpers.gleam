@@ -10,6 +10,14 @@ pub type Coord(a) {
   Coord(x: a, y: a)
 }
 
+pub fn get_x(from coord: Coord(a)) -> a {
+  coord.x
+}
+
+pub fn get_y(from coord: Coord(a)) -> a {
+  coord.y
+}
+
 pub fn at(array: Array(a), index: Int) -> a {
   let index = case index {
     _ if index < 0 -> 0
