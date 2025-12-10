@@ -122,6 +122,13 @@ fn add_green_tiles_horizontal(tilemap, row_start, row_end, col_start, col_end) {
   ))
   echo #("new line, paint is", paint)
   // here is the bug: for some reason at the start of iteration paing is Green
+  // idea: collect verticals / horizontals as a list, chunk them by color
+  // [. . . # X X . . X . .] |> chunk(by: fn(n) { n % 2 })
+  // -> [[. . .], [#], [X X], [. .], [X] [. .]]
+  // then take until it's not a list of white
+  // then drop until it's not a list of white
+  // set the rest to green
+  // use In/Out instead of green
   use #(tilemap, paint), row <- list.fold(list.range(row_start, row_end), #(
     tilemap,
     paint,
